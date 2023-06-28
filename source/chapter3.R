@@ -67,6 +67,33 @@ primes - 1
 #' 
 #' Besides that, the other information is useful, particularly pairs of quotation
 #' marks. I think it may have been good to show that R also has similar behaviour
-#' with other punctuation e.g. {}, [], (),  but not '. There may be others...
+#' with other punctuation e.g. {}, [], (),  but only ' pairs up in the console.
+#' There may be others...
+
+# Demonstrating named arguments in functions
+seq(from = 1, to = 10) == seq(1,10)
+
+# 3.5 Exercise answers... ----
+#' 1. Spelling mistake
+#' 
+#' 2. 
+library(tidyverse)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(
+    method = "lm",
+    mapping = aes(x = displ, y = hwy)
+    )
+
+#' 3. 'Help' > 'Keyboard Shortcuts Help'
+
+#' 4. 'my_bar_plot' - this is one of the named arguments in the 'ggsave'
+#' function call
+my_bar_plot <- ggplot(mpg, aes(x = class)) +
+  geom_bar()
+my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+ggsave(filename = "output/mpg-plot.png", plot = my_bar_plot)
 
 
