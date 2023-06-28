@@ -6,5 +6,6 @@
 # 1. Setup ----
 library(here)
 here::i_am("source/chapter3.R")
-source(here::here("source", "dependencies.R"))
+# not required for this chapter!
+# source(here::here("source", "dependencies.R"))
 
