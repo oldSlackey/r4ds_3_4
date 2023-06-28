@@ -59,6 +59,14 @@ primes - 1
 
 # Calling functions ----
 
-
+#' Quite an important (and useful) section. In my view, getting to grips with
+#' the structure of functions is a big step forward in writing your own code.
+#' I feel this section could have been expanded a little, e.g. to describe the
+#' structure of help files in R packages, which is predicated on the structure
+#' of functions in R i.e. arguments, values and returning 'something'
+#' 
+#' Besides that, the other information is useful, particularly pairs of quotation
+#' marks. I think it may have been good to show that R also has similar behaviour
+#' with other punctuation e.g. {}, [], (),  but not '. There may be others...
 
 
