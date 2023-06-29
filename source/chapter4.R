@@ -72,4 +72,53 @@ flights |>
 #' datasets here.
 
 # 4.2 Rows ----
+#' dplyr functions covered: filter, arrange, distinct
+#' 
+# dplyr filter ----
+#' Introducing filter and logical tests
+#' Finding rows where flights were delayed by more than two hours
+flights |>
+  filter(dep_delay > 120)
+
+#' Introduces other equality operators and & and | boolean logical operators
+#' Flights departing on 1st January, uses two operators and logical AND.
+flights |>
+  filter(month == 1 & day == 1)
+
+
+#' Flights departing in Jan or Feb, using OR operator
+flights |> 
+  filter(month == 1 | month == 2)
+
+#' Introducing %in%, as a combined | and == operators. I didn't really think of
+#' %in% this way!
+flights |>
+  filter(month %in% c(1,2))
+
+#' Description of dplyr not modifying the original data frame, rather returns a
+#' new data frame. Quite important to remember this, makes for good workflow: 
+#' check the results before you commit to the changes by e.g. overwriting the
+#' input data frame.
+#' 
+#' I think its also important to not create lots of new data frames, by piping
+#' together all of the required operations in one go. May need a few
+#' intermediates to check along the way though.
+#' 
+#' Example of assigning output from piped operation to a new variable
+jan1 <- flights |>
+  filter(month == 1 & day == 1)
+
+
+# 4.2.2 Common mistakes ----
+#' equality operator (==) vs assignment (=). Suggests an informative error
+#' message appears. I think this is only a recent addition, so may not apply
+#' in older versions of R. Useful though!
+flights |> 
+  filter(month = 1)
+# Error in `filter()`:
+#   ! We detected a named input.
+# ℹ This usually means that you've used `=` instead of `==`.
+# ℹ Did you mean `month == 1`?
+# Run `rlang::last_trace()` to see where the error occurred.
+
 
