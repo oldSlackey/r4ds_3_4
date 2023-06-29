@@ -121,4 +121,53 @@ flights |>
 # ℹ Did you mean `month == 1`?
 # Run `rlang::last_trace()` to see where the error occurred.
 
+# tests with OR statements, I sometimes do this...
+flights |> 
+  filter(month == 1 | 2)
+
+
+# 4.2.3 arrange() ----
+#' Describing function of arrange to change order of rows based on values of
+#' selected variables (columns). Stil no description of tidy data concept.
+flights |> 
+  arrange(year, month, day, dep_time)
+
+#' introducing desc() to set which values come first, default is lowest first, 
+#' desc() is highest first
+flights |> 
+  arrange(desc(dep_delay))
+
+
+# 4.2.4 distinct ----
+#' I find distinct hard to get my head around....
+#' Thankfully, describes the default behaviour where distinct drops columns if
+#' any columns are used as arguments in the distinct function. Just realised
+#' that the use of tidyselect has not been mentioned yet, but has been used
+#' several times. Back to distinct, you can choose to keep the other columns as well.
+#' Some other behaviour here that may not be obvious, but is described here: 
+#' all but the first occurence are dropped, regardless of the other columns
+
+flights |> 
+  distinct(origin, dest, .keep_all = TRUE)
+
+
+#' Intoducing count() here
+flights |>
+  count(origin, dest, sort = TRUE)
+
+#' which is possibly more useful than distinct
+
+# 4.2.5 Exercises ----
+
+
+
+
+
+
+
+
+
+
+
+
 
