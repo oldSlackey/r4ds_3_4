@@ -199,8 +199,27 @@ flights |>
 
 # 4.3 Columns ----
 
+#' Introduces more dplyr functions (I can't think of them as verbs...):
+#' mutate, select, rename and relocate. Most of the names seems obvious.
 
+# mutate ----
+flights |>
+  mutate(
+    gain = dep_delay - arr_delay,
+    speed = distance / air_time * 60
+  ) |>
+  select(
+    gain, speed
+  )
 
+#' Just for a laugh, lets try the same in base R
+flights2 <- flights
 
+flights2$gain <- flights2$dep_delay - flights2$arr_delay
+flights2$speed <- flights2$distance / flights2$air_time * 60
+flights2[, c("gain", "speed")]
+
+# remove this data frame
+rm(flights2)
 
 
