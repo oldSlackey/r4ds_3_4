@@ -222,4 +222,57 @@ flights2[, c("gain", "speed")]
 # remove this data frame
 rm(flights2)
 
+#' back to the book
+#' controling behaviour of column order after mutate. The arguments start with
+#' a '.' to indicate they are not variable names (what would happen without
+#' the period?). Demonstrate using numeric order as well as column names to
+#' select location of new variables
+flights |> 
+  mutate(
+    gain = dep_delay - arr_delay,
+    speed = distance / air_time * 60,
+    .before = 1
+  )
+
+flights |> 
+  mutate(
+    gain = dep_delay - arr_delay,
+    speed = distance / air_time * 60,
+    .after = day
+  )
+
+#' Also showing .keep argument
+flights |> 
+  mutate(
+    gain = dep_delay - arr_delay,
+    hours = air_time / 60,
+    gain_per_hour = gain / hours,
+    .keep = "used"
+  )
+
+# 4.3.2 select() ----
+
+#' First mention of the term 'subset', which I think is what base R select
+#' functions (these >> [] ) are called.
+#' 
+#' Will skip most of these, but the select and rename option is interesting
+flights |> 
+  select(tail_num = tailnum)
+
+#' There is a lot to take in here, but still no mention of tidyselect and why 
+#' columns do not need to have quotes around them.
+
+# 4.3.3 rename() ----
+
+#' This seems self-explanatory, and differs from the above rename example in
+#' that the other columns are kept. Very useful function, particularly with
+#' very raw datasets, like the ones I deal with in NHS Lothian.
+
+# 4.3.4 relocate() ----
+
+#' Don't think the name is as self-explanatory as the others, but can't think of
+#' a better name! It moves columns around (would move() be a better name?)
+flights |> 
+  relocate(time_hour, air_time)
+
 
