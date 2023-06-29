@@ -347,4 +347,72 @@ flights |>
   )
 
 
+# 4.5.3 slice ----
 
+#' again useful functions, especially with grouped data. Fairly self-explanatory
+#' used in place of filter i think. Remember ties, and number of rows to keep.
+#' 
+
+# 4.5.4 grouping by multiple variables ----
+
+#' as described. Has a basic description of the summarise behaviour with groups
+#' and some options to get what you need. I don't really have any issues with 
+#' this, it usually does what I want it to.
+
+# 4.5.5 Ungrouping ----
+
+#' Again fairly self-explanatory, but also very important to be aware of, as can
+#' cause some unexpected behaviour if you forget you have grouped data
+#' 
+
+# 4.5.6. .by ----
+
+#' I haven't used this, but it effectively combins group_by and ungroup inside 
+#' the summarise function.
+#' 
+
+# 4.7 Exercises ----
+
+#' Skipping these for now.
+
+# 4.6 Case study ----
+
+#' Baseball, my favourite sport... joking aside, I really don't understand this
+#' dataset, so find these examples hard to follow.
+
+batters <- Lahman::Batting |> 
+  group_by(playerID) |> 
+  summarize(
+    performance = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+    n = sum(AB, na.rm = TRUE)
+  )
+
+
+#' Plotting this summary. Makes an interesting point about change in variance as
+#' sample size increases - anyone have any thoughts about this in relation to
+#' using p-values in hypothesis testing?
+
+batters |> 
+  filter(n > 100) |> 
+  ggplot(aes(x = n, y = performance)) +
+  geom_point(alpha = 1 / 10) + 
+  geom_smooth(se = FALSE)
+
+#' using arrange to show why rates are not always the best measure to rank things
+#' by e.g. risk
+#' 
+
+#' My final thoughts.
+#' Overall a good work introductory run through of dplyr/tidy data concept of
+#' data manipulation.
+#' However, it is firmly based in tidyverse (understandably given the identity
+#' of the main author), when there are base R, data table alternatives. There
+#' may be others. Having worked with molecular biology data, dplyr is not used
+#' very often, at least not very often the last time I worked in that field
+#' about 4 years ago.
+#' 
+#' No mention of other data structures in R yet (lists), although this may come
+#' later in the book.
+#' 
+#' The only major criticism is no clear guidance on using help files for
+#' packages and functions. Otherwise, very much improved since first edition.
