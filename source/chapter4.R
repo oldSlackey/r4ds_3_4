@@ -275,4 +275,76 @@ flights |>
 flights |> 
   relocate(time_hour, air_time)
 
+# 4.3.5 Exercises ----
+
+#' again, just a subset of these
+#' 3.
+flights |>
+  select(time_hour, time_hour)
+# A tibble: 336,776 × 1
+# time_hour          
+# <dttm>             
+#   1 2013-01-01 05:00:00
+# 2 2013-01-01 05:00:00
+# 3 2013-01-01 05:00:00
+# 4 2013-01-01 05:00:00
+# 5 2013-01-01 06:00:00
+# 6 2013-01-01 05:00:00
+# 7 2013-01-01 06:00:00
+# 8 2013-01-01 06:00:00
+# 9 2013-01-01 06:00:00
+# 10 2013-01-01 06:00:00
+# # ℹ 336,766 more rows
+# # ℹ Use `print(n = ...)` to see more rows
+
+#' 4. any_of() is very useful, especially when writing your own functions
+
+#' 5. case insensitive
+flights |> select(contains("TIME"))
+
+#' the question asks you to change default behaviour. I would automatically use
+#' ?select to find the help page, but I don't recall seeing help files being
+#' mentioned anywhere yet, maybe chapter 2?
+
+#' 7. You have piped through a data frame with only the tailnum column...
+#' 
+
+# 4.4. The pipe ----
+flights |> 
+  filter(dest == "IAH") |> 
+  mutate(speed = distance / air_time * 60) |> 
+  select(year:day, dep_time, carrier, flight, speed) |> 
+  arrange(desc(speed))
+
+#' showing how useful the pipe is, and demonstrates non-pipe ways of doing this
+#' which I agree are a bit tedious, although sometimes necessary.
+#' Also introduces the magrittr %>% pipe
+#' 
+
+# 4.5 groups ----
+
+#' most useful part of dplyr, I think, along with summarize. Worth looking at 
+#' the janitor 'tabyl' function as well.
+
+# 4.5.1 group_by() ----
+
+#' partitions data according to values in one or more variables, when combined
+#' with 
+
+# 4.5.2 summarise() (zeds dead...)
+flights |> 
+  group_by(month) |> 
+  summarise(
+    delay = mean(dep_delay, na.rm = TRUE)
+  )
+
+# using n() to count rows
+flights |> 
+  group_by(month) |> 
+  summarise(
+    delay = mean(dep_delay, na.rm = TRUE),
+    n = n()
+  )
+
+
 
