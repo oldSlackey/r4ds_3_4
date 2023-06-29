@@ -10,6 +10,7 @@ here::i_am("source/chapter4.R")
 # source(here::here("source", "dependencies.R"))
 
 # 4.1 Introduction ----
+
 #' This chapter basically departs from base R, and introduces tidyverse,
 #' specifically dplyr, and how it can be used to tidy(tm), clean and summarise
 #' data for downstream analysis.
@@ -72,8 +73,9 @@ flights |>
 #' datasets here.
 
 # 4.2 Rows ----
+
 #' dplyr functions covered: filter, arrange, distinct
-#' 
+#'
 # dplyr filter ----
 #' Introducing filter and logical tests
 #' Finding rows where flights were delayed by more than two hours
@@ -110,6 +112,7 @@ jan1 <- flights |>
 
 
 # 4.2.2 Common mistakes ----
+
 #' equality operator (==) vs assignment (=). Suggests an informative error
 #' message appears. I think this is only a recent addition, so may not apply
 #' in older versions of R. Useful though!
@@ -127,6 +130,7 @@ flights |>
 
 
 # 4.2.3 arrange() ----
+
 #' Describing function of arrange to change order of rows based on values of
 #' selected variables (columns). Stil no description of tidy data concept.
 flights |> 
@@ -139,6 +143,7 @@ flights |>
 
 
 # 4.2.4 distinct ----
+
 #' I find distinct hard to get my head around....
 #' Thankfully, describes the default behaviour where distinct drops columns if
 #' any columns are used as arguments in the distinct function. Just realised
@@ -158,13 +163,41 @@ flights |>
 #' which is possibly more useful than distinct
 
 # 4.2.5 Exercises ----
+#' Answers to some of these:
+#' 1.
+flights |>
+  filter(arr_delay >= 120) |>
+  select(arr_delay) |>
+  arrange(arr_delay)
+
+#'
+flights |>
+  filter(dest %in% c("IAH", "HOU"))
+
+#' 2.
+flights |>
+  arrange(desc(dep_delay))
+
+flights |>
+  arrange(dep_time)
+
+#' throws up some questions about the data: does 'day' reflect departure day (
+#' I think so), or scheduled day?
+
+#' 3. Not sure about the hint here...
+flights |>
+  arrange(air_time) |>
+  select(air_time)
 
 
+#' 6. Yes I think it does matter. If you arrange first, then filter, arrange is sorting
+#' more rows (it returns a data frame) before filtering. The order may then be
+#' affected after you filter. So probably makes sense to filter first. I always
+#' use arrange as the last step in almost all work that I need to sort the 
+#' outputs
 
 
-
-
-
+# 4.3 Columns ----
 
 
 
