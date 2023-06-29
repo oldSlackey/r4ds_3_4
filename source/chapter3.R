@@ -97,3 +97,5 @@ my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
 ggsave(filename = "output/mpg-plot.png", plot = my_bar_plot)
 
 
+
+
